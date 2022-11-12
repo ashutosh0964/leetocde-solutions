@@ -1,19 +1,12 @@
 class Solution {
 public:
     vector<int> findDisappearedNumbers(vector<int>& nums) {
-        unordered_map<int,int>freq;
-        for(int i=1;i<=nums.size();i++){
-            freq[i]=0;
-        }
-        for(int i=0;i<nums.size();i++){
-            freq[nums[i]]++;
-        }
-        vector<int>res;
-        for(int i=1;i<=nums.size();i++){
-            if(freq[i]==0){
-                res.push_back(i);
-            }
-        }
-        return res;
+        vector<int> ans;
+        for(auto& c : nums) 
+            while(nums[c-1] != c) 
+				swap(c, nums[c-1]);               // swap till correct index place of c is not occupied by c itself
+        for(int i = 1; i <= size(nums); i++)
+            if(i != nums[i-1]) ans.push_back(i);  // correct index place of i is not occupied by i itself
+        return ans;
     }
 };
